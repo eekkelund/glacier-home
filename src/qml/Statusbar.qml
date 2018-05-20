@@ -48,6 +48,10 @@ Item {
     width: parent.width
     anchors.bottom: parent.bottom
     enabled: !lockscreenVisible()
+    property bool panel_loaderVisible: panel_loader.visible
+    property alias panel_loader: panel_loader
+    property alias row: row
+
 
     Rectangle {
         id: statusbar

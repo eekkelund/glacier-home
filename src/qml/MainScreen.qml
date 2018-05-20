@@ -70,6 +70,8 @@ Page {
     property int statusBarHeight: statusbar.height
     property bool codepadVisible: false
     property bool deviceLocked: DeviceLock.state >= DeviceLock.Locked
+    property bool statusbarPanelVisible: statusbar.panel_loaderVisible
+    property alias statusbar: statusbar
 
     // Implements back key navigation
 
