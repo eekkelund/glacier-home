@@ -164,17 +164,17 @@ Compositor {
                     cancelAnimation.start()
                 }
             } else if (root.homeActive){
-                    if (gestureArea.progress >= lockThreshold) {
+                if (gesture == "up") {
+                    Desktop.instance.statusbar.row.currentChild = Desktop.instance.statusbar.row.childAt(gestureArea.mouseX, 0)
+                    Desktop.instance.statusbar.row.currentChild.clicked()
+                } else if (gestureArea.progress >= lockThreshold) {
                         lockAnimation.valueTo = (gesture == "left" ?
                                                      Desktop.instance.lockscreen.width :
                                                      -Desktop.instance.lockscreen.width)
                         lockAnimation.start()
                         // Locks, unlocks or brings up codepad to enter security code
                         // Locks
-                        if (gesture == "up") {
-                            Desktop.instance.statusbar.row.currentChild = Desktop.instance.statusbar.row.children[2]
-                            Desktop.instance.statusbar.row.currentChild.clicked()
-                        } else if (!Desktop.instance.lockscreenVisible()) {
+                        if (!Desktop.instance.lockscreenVisible()) {
                             Desktop.instance.setLockScreen(true)
                             if(gesture == "down") {
                                 setDisplayOff()
@@ -218,21 +218,6 @@ Compositor {
                     target: Desktop.instance.statusbar.panel_loader
                     visible: true
                 }
-                PropertyChanges {
-                    target: Desktop.instance.statusbar.row
-                    currentChild: Desktop.instance.statusbar.row.children[2]
-                }
-                /*PropertyChanges {
-                    target: Desktop.instance.statusbar.panel_loader
-                    height: gestureArea.value//gestureArea.lockscreenY + ((gestureArea.horizontal) ? 0 : (Desktop.instance.lockscreenVisible()?(gestureArea.value) :
-                                               //                                        (gestureArea.gesture == "down" ?
-                                                 //                                      ((Desktop.instance.lockscreen.width === topmostWindow.width) ?
-                                                   //                                         -Desktop.instance.lockscreen.height :
-                                                     //                                       -Desktop.instance.lockscreen.width)+Math.abs(gestureArea.value) :
-                                                       //                                ((Desktop.instance.lockscreen.width === topmostWindow.width) ?
-                                                         //                                   Desktop.instance.lockscreen.height :
-                                                           //                                 Desktop.instance.lockscreen.width)+gestureArea.value) ) )
-                } */
             },
 
             // Cover state is for when screen is covered but no security code required, can be swiped from any edge
